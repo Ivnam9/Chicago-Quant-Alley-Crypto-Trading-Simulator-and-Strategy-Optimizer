@@ -16,7 +16,7 @@ df["cum_pnl"] = df["pnl"]
 df.set_index("timestamp", inplace=True)
 
 # Fill missing minutes if needed
-df = df.asfreq("T", method="ffill")
+# df = df.asfreq("T", method="ffill")
 
 # Calculate returns
 df["returns"] = df["cum_pnl"].diff().fillna(0)
