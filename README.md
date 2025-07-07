@@ -8,5 +8,5 @@ This is a modular, event-driven trading simulator for testing simple options str
 - `Strategy.py`: Strategy logic
 - `config.py`: Settings like start date, symbols
 - `data/`: CSV data for each symbol
-- 'getStrikes.py':Dynamically finds closest strike options
-- `printStats.py`: Analysis and plotting
+- `utils/getStrikes.py`:Dynamically finds closest strike options
+- `stats/printStats.py`: Analysis and plotting
