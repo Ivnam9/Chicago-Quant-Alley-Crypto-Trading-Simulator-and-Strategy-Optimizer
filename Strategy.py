@@ -25,19 +25,19 @@ class Strategy:
             self.entryPrice = self.sim.currentPrice["MARK:BTCUSDT"]
 
             # Hardcoded ATM strikes (based on config)
-           # self.callSymbol = "MARK:C-BTC-70000-20240601"
-           # self.putSymbol = "MARK:P-BTC-70000-20240601"
+            # self.callSymbol = "MARK:C-BTC-70000-20240601"
+            # self.putSymbol = "MARK:P-BTC-70000-20240601"
             # Replace this:
-# self.callSymbol = "MARK:C-BTC-70000-20240601"
-# self.putSymbol = "MARK:P-BTC-70000-20240601"
+            # self.callSymbol = "MARK:C-BTC-70000-20240601"
+            # self.putSymbol = "MARK:P-BTC-70000-20240601"
 
-# Do this:
-all_symbols = self.sim.symbols
-atm_price = self.sim.currentPrice["MARK:BTCUSDT"]
-call_sym, put_sym = get_closest_strikes(atm_price, all_symbols)
+            # Do this:
+            all_symbols = self.sim.symbols
+            atm_price = self.sim.currentPrice["MARK:BTCUSDT"]
+            call_sym, put_sym = get_closest_strikes(atm_price, all_symbols)
 
-self.callSymbol = call_sym
-self.putSymbol = put_sym
+            self.callSymbol = call_sym
+            self.putSymbol = put_sym
 
             # Sell 0.1 qty of both call and put
             self.sim.onOrder(self.callSymbol, "SELL", 0.1, self.sim.currentPrice[self.callSymbol])
@@ -49,7 +49,6 @@ self.putSymbol = put_sym
         if self.positionOpen:
             current_price = self.sim.currentPrice.get("MARK:BTCUSDT", 0)
             price_deviation = abs(current_price - self.entryPrice) / self.entryPrice
-
             if price_deviation > 0.01 or self.totalPnL >= 500 or self.totalPnL <= -500:
                 # Exit: Buy back both options
                 self.sim.onOrder(self.callSymbol, "BUY", 0.1, self.sim.currentPrice[self.callSymbol])
@@ -66,9 +65,11 @@ self.putSymbol = put_sym
 
         # Record the trade
         self.tradeLog.append({
+            "timestamp":datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "symbol": symbol,
             "side": side,
             "qty": quantity,
             "price": price,
             "pnl": round(self.totalPnL, 2)
         })
+
